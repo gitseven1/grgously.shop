@@ -1,0 +1,91 @@
+header{
+    background-image : url("bglove.jpeg");
+    border: 5px;
+    padding: 5%;
+    margin: 5;
+
+}
+
+body{
+    background-color: #eedcd2;
+}
+
+h1{
+    text-align: center;
+    color: white;
+}
+
+p {
+    text-align: center;
+}
+
+main{
+    flex-direction: row;
+    display: flex;
+}
+
+.menu{
+    background-color: #3e7eac;
+    padding: 2%;
+    margin: 5;
+}
+
+nav{
+    flex-direction: row;
+    background-color: #e2a499;
+    padding: 10%;
+    margin: 10px;
+    
+}
+
+.produk{
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    border: 20px 
+    
+   
+}
+    
+
+
+.title{
+    flex-direction: column;
+    border: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
+img{
+    flex-direction: row;
+    display: flex;
+    size: 20px;
+    width: 20%;
+    margin: 10px;
+    border-radius: 10%;
+}
+
+button{
+    margin: 5px;
+    border-radius: 20%;
+    background-color: #92ada4;
+    border-color: gray;
+}
+
+a{
+    text-decoration: none;
+    font-size: 15px;
+    color: brown;
+}
+
+li{
+    color: brown;
+}
+
+footer{
+    background-color: #d1497b;
+    margin: 0;
+    padding: 5%;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #87a680;
+        }
+        fieldset {
+            padding: 20px;
+            border: 2px solid #efd0ce;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], textarea, select, input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="transaction-form" action="invoice.html" method="get">
+        <fieldset>
+            <legend><font size="6"><b>Payment</b></font></legend>
+
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="08xx..." required>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" placeholder="email@example.com" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" cols="40" rows="5" placeholder="Enter your address" required></textarea>
+
+            <div id="products">
+                <div class="product">
+                    <label for="product">Product:</label>
+                    <select id="product" name="products[]" required>
+                        <option value="crochet_tulip_flowers_1">Crochet Tulip Flowers 1 - Rp 25,000</option>
+                        <option value="crochet_tulip_flowers_2">Crochet Tulip Flowers 2 - Rp 25,000</option>
+                        <option value="crochet_tulip_flowers_3">Crochet Tulip Flowers 3 - Rp 25,000</option>
+                        <option value="crochet_tulip_flowers_4">Crochet Tulip Flowers 4 - Rp 25,000</option>
+                        <option value="crochet_keychain_coquette">Crochet Keychain Coquette - Rp 20,000</option>
+                        <option value="crochet_sweet_pockets">Crochet Sweet Pockets - Rp 20,000</option>
+                        <option value="crochet_pink_hat_large">Crochet Pink Hat Large - Rp 55,000</option>
+                        <option value="crochet_pink_cat_ear_hat">Crochet Pink Cat Ear Hat - Rp 45,000</option>
+                        <option value='amigurumi_pompom'">Amigurumi Pompom - Rp 35,000</option>
+                        <option value='amigururmi_bunny_boy'">Amigurumi Bunny Boy - Rp 60,000</option>
+                        <option value='amigururmi_bunny_girl'">Amigurumi Bunny Girl - Rp 60,000</option>
+                        <option value='amigururmi_duck_girl'">Amigurumi Duck Girl - Rp 50,000</option>
+                        <!-- Add more products as needed -->
+                    </select>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantities[]" min="1" value="1" required>
+                </div>
+            </div>
+
+            <button type="button" id="add-product">Add Another Product</button>
+
+            <label for="payment">Payment Method:</label>
+            <input type="radio" id="cod" name="payment" value="COD" required> COD
+            <input type="radio" id="transfer" name="payment" value="Transfer"> Transfer
+
+            <input type="submit" value="Checkout">
+        </fieldset>
+    </form>
+
+    <script>
+        // Product prices in IDR
+        const productPrices = {
+            'crochet_tulip_flowers_1': 25000,
+            'crochet_tulip_flowers_2': 25000,
+            'crochet_tulip_flowers_3': 25000,
+            'crochet_tulip_flowers_4': 25000,
+            'crochet_keychain_coquette': 20000,
+            'crochet_sweet_pockets': 20000,
+            'crochet_pink_hat_large': 55000,
+            'crochet_pink_cat_ear_hat': 45000,
+            'amigurumi_pompom': 35000,
+            'amigururmi_bunny_boy': 60000,
+            'amigururmi_bunny_girl': 60000,
+            'amigururmi_duck_girl': 50000,
+            // Add more products and their prices here
+        };
+
+        // Add another product section
+        document.getElementById('add-product').addEventListener('click', function() {
+            const productDiv = document.querySelector('.product').cloneNode(true);
+            document.getElementById('products').appendChild(productDiv);
+        });
+
+        // Handle form submission
+        document.getElementById('transaction-form').addEventListener('submit', function(event) {
+            const products = Array.from(document.getElementsByName('products[]'));
+            const quantities = Array.from(document.getElementsByName('quantities[]'));
+            let priceData = '';
+
+            products.forEach((product, index) => {
+                const productValue = product.value;
+                const quantity = quantities[index].value;
+                const price = productPrices[productValue];
+                priceData += `${productValue}:${quantity}:${price};`;
+            });
+
+            const priceInput = document.createElement('input');
+            priceInput.type = 'hidden';
+            priceInput.name = 'priceData';
+            priceInput.value = priceData.slice(0, -1); // Remove the trailing semicolon
+            this.appendChild(priceInput);
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
